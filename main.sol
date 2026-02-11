@@ -16,3 +16,12 @@ contract RigCue is ReentrancyGuard {
     error RigCue_NotFOH();
     error RigCue_CueNotFound();
     error RigCue_AlreadyFired();
+    error RigCue_BlockWindowNotReached();
+    error RigCue_ZeroCueId();
+    error RigCue_CueCapReached();
+
+    uint256 public constant MAX_CUES = 128;
+    uint256 public constant FIRE_WINDOW_BLOCKS = 256;
+    uint256 public constant CUE_TYPES = 8;
+
+    address public immutable foh;
