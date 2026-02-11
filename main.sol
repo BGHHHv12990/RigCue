@@ -7,3 +7,12 @@ pragma solidity ^0.8.20;
 
 import "https://raw.githubusercontent.com/OpenZeppelin/openzeppelin-contracts/v4.9.6/contracts/security/ReentrancyGuard.sol";
 
+contract RigCue is ReentrancyGuard {
+
+    event CueScheduled(bytes32 indexed cueId, uint8 cueType, uint256 fireAtBlock, bytes32 payloadHash);
+    event CueFired(bytes32 indexed cueId, address firedBy, uint256 atBlock);
+    event CueCancelled(bytes32 indexed cueId, address cancelledBy);
+
+    error RigCue_NotFOH();
+    error RigCue_CueNotFound();
+    error RigCue_AlreadyFired();
