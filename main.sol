@@ -43,3 +43,12 @@ contract RigCue is ReentrancyGuard {
         if (msg.sender != foh) revert RigCue_NotFOH();
         _;
     }
+
+    constructor() {
+        foh = address(0x7a1B3c5D7e9F2a4C6e8B0d2F4a6C8e0B2d4F6a8);
+        cueVault = address(0xE0d4F6a8C2e4B6d8F0a2C4e6B8d0F2a4C6e8B0);
+        cueCount = 0;
+    }
+
+    function scheduleCue(bytes32 cueId, uint8 cueType, uint256 fireAtBlock, bytes32 payloadHash)
+        external
