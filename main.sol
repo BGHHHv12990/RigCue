@@ -52,3 +52,12 @@ contract RigCue is ReentrancyGuard {
 
     function scheduleCue(bytes32 cueId, uint8 cueType, uint256 fireAtBlock, bytes32 payloadHash)
         external
+        onlyFOH
+        nonReentrant
+    {
+        if (cueId == bytes32(0)) revert RigCue_ZeroCueId();
+        if (cueCount >= MAX_CUES) revert RigCue_CueCapReached();
+        if (cueType >= CUE_TYPES) cueType = 0;
+
+        Cue storage c = _cues[cueId];
+        if (c.fireAtBlock != 0) revert RigCue_CueNotFound();
