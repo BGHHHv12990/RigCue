@@ -34,3 +34,12 @@ contract RigCue is ReentrancyGuard {
     struct Cue {
         uint8 cueType;
         uint256 fireAtBlock;
+        bytes32 payloadHash;
+        bool fired;
+        bool cancelled;
+    }
+
+    modifier onlyFOH() {
+        if (msg.sender != foh) revert RigCue_NotFOH();
+        _;
+    }
