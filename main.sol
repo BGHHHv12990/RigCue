@@ -25,3 +25,12 @@ contract RigCue is ReentrancyGuard {
     uint256 public constant CUE_TYPES = 8;
 
     address public immutable foh;
+    address public immutable cueVault;
+
+    uint256 public cueCount;
+    mapping(bytes32 => Cue) private _cues;
+    bytes32[] private _cueIds;
+
+    struct Cue {
+        uint8 cueType;
+        uint256 fireAtBlock;
